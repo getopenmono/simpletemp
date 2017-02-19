@@ -1,0 +1,8 @@
+.DS_Store
+build
+simpletemp
+sim
+*.elf
+mono_project.map
+.clang_complete
+Makefile.all
