@@ -32,12 +32,16 @@ void AppController::monoWakeFromReset()
 
 void AppController::monoWillGotoSleep()
 {
+    saver.deactivate();
 }
 
 void AppController::monoWakeFromSleep()
 {
     int milCel = IApplicationContext::Instance->Temperature->ReadMilliCelcius();
     tempFilter.clear(milCel);
+
     saver.undim();
+
+    sampleTemp();
     mainScene.scheduleRepaint();
 }

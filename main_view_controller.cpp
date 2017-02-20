@@ -7,7 +7,7 @@
 
 #include <Fonts/FreeSans18pt7b.h>
 
-const display::Color OrangeColor(241, 196, 15);
+const display::Color OrangeColor(255, 0, 0);
 
 MainViewController::MainViewController() :
     tempLbl(Rect(10, 50, 120, 92), "20.0 C"),
@@ -74,6 +74,7 @@ void MainViewController::setTemp(int t)
     
     coldThermView.scheduleRepaint();
     warmThermView.scheduleRepaint();
+    tempLbl.scheduleRepaint();
     
     oldTemp = t;
 }
