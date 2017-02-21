@@ -9,8 +9,7 @@ class AppController : public mono::IApplication {
 protected:
     
     MainViewController mainScene;
-    Timer tempSampler;
-    io::RunningAverageFilter<4, int> tempFilter;
+    io::RunningAverageFilter<1, int> tempFilter;
     PowerSaver saver;
     
 public:

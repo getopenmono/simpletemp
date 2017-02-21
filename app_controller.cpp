@@ -1,18 +1,18 @@
 #include "app_controller.h"
 
 AppController::AppController() :
-    tempSampler(500),
-    saver(30000,5000)
+    saver(30000,10000)
 {
     View::StandardBackgroundColor = SilverColor;
     mainScene.show();
     
-    tempSampler.setCallback(this, &AppController::sampleTemp);
+    //tempSampler.setCallback(this, &AppController::sampleTemp);
 }
 
 
 void AppController::sampleTemp()
 {
+    wait_ms(30);
     int milCel = IApplicationContext::Instance->Temperature->ReadMilliCelcius();
     tempFilter.append(milCel);
     
@@ -20,13 +20,9 @@ void AppController::sampleTemp()
 }
 
 
-
-
 void AppController::monoWakeFromReset()
 {
-    int milCel = IApplicationContext::Instance->Temperature->ReadMilliCelcius();
-    tempFilter.clear(milCel);
-    tempSampler.Start();
+    sampleTemp();
     saver.undim();
 }
 
@@ -37,11 +33,7 @@ void AppController::monoWillGotoSleep()
 
 void AppController::monoWakeFromSleep()
 {
-    int milCel = IApplicationContext::Instance->Temperature->ReadMilliCelcius();
-    tempFilter.clear(milCel);
-
     saver.undim();
-
     sampleTemp();
     mainScene.scheduleRepaint();
 }
